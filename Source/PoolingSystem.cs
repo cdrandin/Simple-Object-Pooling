@@ -146,7 +146,15 @@ public class PoolingSystem : MonoBehaviour
 	/// <value>The instance.</value>
 	public static PoolingSystem instance
 	{
-		get { return _instance; }
+		get 
+		{ 
+			if(_instance == null)
+			{
+				_instance = new GameObject("Pooling System").AddComponent<PoolingSystem>();
+			}
+
+			return _instance; 
+		}
 	}
 
 	/// <summary>
