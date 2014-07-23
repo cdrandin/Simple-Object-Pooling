@@ -27,6 +27,6 @@ public class PoolID : MonoBehaviour
 	// Also, in case PoolingSystem misses removing it
 	void OnApplicationQuit()
 	{
-			Component.DestroyImmediate(this, true);
+		Component.DestroyImmediate(this, true);
 	}
 }
