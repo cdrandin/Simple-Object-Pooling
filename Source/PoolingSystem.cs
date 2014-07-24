@@ -11,7 +11,7 @@ public class PoolingSystem : MonoBehaviour
 	private Transform _root;
 	
 	public bool object_hierarchy;
-
+	
 	#region Pooled Object class
 	private class Pooled_Object
 	{
@@ -20,7 +20,7 @@ public class PoolingSystem : MonoBehaviour
 		
 		// Queue of objects. Front are available. Back are unavailable
 		private LinkedList<GameObject> _pool;
-
+		
 		// Root for the pooled objects for the specified object
 		private GameObject _pool_root;
 		
@@ -28,7 +28,7 @@ public class PoolingSystem : MonoBehaviour
 		{
 			_main      = obj;
 			_pool     = new LinkedList<GameObject>();
-
+			
 			// Add in our little tag to keep track
 			obj.AddComponent<PoolID>();
 			obj.GetComponent<PoolID>().GenerateID(obj);
@@ -47,7 +47,7 @@ public class PoolingSystem : MonoBehaviour
 		public GameObject GetObject()
 		{
 			GameObject obj = null; 
-
+			
 			/*
 			// Go through our list of pooled objects
 			for(int i=0;i<_pool.Count;++i)
@@ -66,7 +66,7 @@ public class PoolingSystem : MonoBehaviour
 				}
 			}
 			*/
-
+			
 			// First node has an available object, this is how the list is organized
 			LinkedListNode<GameObject> first = _pool.First;
 			if(first != null)
@@ -75,11 +75,11 @@ public class PoolingSystem : MonoBehaviour
 				{
 					obj = first.Value;
 					obj.SetActive(true);
-
+					
 					// Move to end
 					_pool.Remove(obj);
 					_pool.AddLast(obj);
-
+					
 					/*
 					if(PoolingSystem.instance.object_hierarchy)
 					{
@@ -88,20 +88,20 @@ public class PoolingSystem : MonoBehaviour
 					*/
 				}
 			}
-
+			
 			// Allow to expand pool, if no more in pool
 			if(obj == null)
 			{
 				obj = Instantiate(_main, Vector3.zero, Quaternion.identity) as GameObject;
 				obj.SetActive(true);
-
+				
 				if(PoolingSystem.instance.object_hierarchy)
 				{
 					obj.transform.parent = _pool_root.transform;
 				}
 				
 				//_pool.Add (obj);
-
+				
 				// Move to end
 				_pool.AddLast(obj);
 			}
@@ -117,7 +117,7 @@ public class PoolingSystem : MonoBehaviour
 		public bool ReturnObject(GameObject obj)
 		{
 			bool recieved = false;
-
+			
 			/*
 			if(obj.tag == this._main.tag)
 			{
@@ -135,7 +135,7 @@ public class PoolingSystem : MonoBehaviour
 				}
 			}
 			*/
-
+			
 			// Validation
 			if(_main.GetComponent<PoolID>().id == obj.GetComponent<PoolID>().id)
 			{
@@ -144,14 +144,14 @@ public class PoolingSystem : MonoBehaviour
 				{
 					// Setup for availability
 					obj.SetActive(false);
-
+					
 					// Put to front
 					_pool.AddFirst(obj);
-
+					
 					recieved = true;
 				}
 			}
-
+			
 			return recieved;
 		}
 		
@@ -177,7 +177,7 @@ public class PoolingSystem : MonoBehaviour
 	
 	// Pool of Pooled object classes, which facilitates the pool
 	private Hashtable _objects;
-
+	
 	void Awake()
 	{
 		_instance = this;
@@ -212,18 +212,18 @@ public class PoolingSystem : MonoBehaviour
 	{
 		GameObject o = null;
 		PoolID   obj_pid = obj.GetComponent<PoolID>();
-	
+		
 		if(obj_pid != null && _objects.Count == 0)
 		{
 			Debug.LogError("PoolID is already contained on the prefabs. Make sure to remove them before start.");
 			return null;
 		}
-
+		
 		// Cahced already, search for the correct pool
 		if(obj_pid != null)
 		{
 			Pooled_Object po = (Pooled_Object)_objects[obj_pid.id];
- 			if(po.main_obj.GetComponent<PoolID>().id == obj_pid.id)
+			if(po.main_obj.GetComponent<PoolID>().id == obj_pid.id)
 			{
 				o  = po.GetObject();
 			}
@@ -233,26 +233,26 @@ public class PoolingSystem : MonoBehaviour
 		{
 			// Create new object and have it generate a pool id
 			Pooled_Object po = new Pooled_Object(obj);
-
+			
 			// Get pool id for this object now
 			obj_pid = obj.GetComponent<PoolID>();
-
+			
 			// Add object into our table of pooled objects
- 			_objects.Add(obj_pid.id, po);
-
+			_objects.Add(obj_pid.id, po);
+			
 			// Get the object of the current pooled object
 			o = po.GetObject();
-
+			
 			if(object_hierarchy)
 			{
 				// Root the pooled objects into a true root object for the entire pooling system
 				po.pool_root.transform.parent = _root.transform;
 			}
 		}
-
+		
 		return o;
 	}
-
+	
 	/// <summary>
 	/// This Instantiate takes a position and rotation. Pretend to instantiate the specified object, put it in a pool. 
 	/// If the object is not in the existing cache pool
@@ -277,7 +277,7 @@ public class PoolingSystem : MonoBehaviour
 	public void PS_Destroy(GameObject obj)
 	{
 		PoolID obj_pid = obj.GetComponent<PoolID>();
-
+		
 		// Object is in our pool
 		if(obj_pid != null)
 		{
