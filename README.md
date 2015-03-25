@@ -1,6 +1,6 @@
 Simple-Object-Pooling
 =====================
-Copyright (c) 2014, Christopher Randin
+Copyright (c) 2014, Christopher Randin (cdrandin@gmail.com)
 All rights reserved.
 
 This is the first version of the Pooling System.
