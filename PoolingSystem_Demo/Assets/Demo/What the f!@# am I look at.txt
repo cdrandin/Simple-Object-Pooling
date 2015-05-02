@@ -1,0 +1,11 @@
+Quick start. Open the only scene.
+
+Play scene.
+
+Press spacebar to spawn objects and backspace to remove random objects.
+
+Using the provided PoolingSystem methods it will manage your objects for you when you call the Instantiateand Destroy methods.
+
+Simple as that.
+
+hope you enjoy it.
