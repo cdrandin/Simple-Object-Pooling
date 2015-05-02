@@ -1,6 +1,10 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workbench ActiveDocument="..\Bubbler\Assets\Game\Scripts\Utility\GUIAspectRatioScale.cs">
+    <Files>
+      <File FileName="..\Bubbler\Assets\Game\Scripts\Utility\GUIAspectRatioScale.cs" Line="46" Column="2" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

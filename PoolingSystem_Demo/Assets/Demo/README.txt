@@ -28,8 +28,18 @@ with the following:
 	
 Create your objects the same way you would with Unity's Instantiate method;
 Call:
-	PoolingSystem.instance.Instantiate([GameObject]);
+	PoolingSystem.instance.PS_Instantiate([GameObject]);
 	
 Destroy your objects the same way you would with Unity's Destroy method;
 Call:
-	PoolingSystem.instance.Destroy([GameObject]);
+	PoolingSystem.instance.PS_Destroy([GameObject]);
+
+NOTE:
+There is one little annoying thing that does happen from time to time.
+If you ever get a NullreferenceException and it is anywhere in the PoolingSystem
+class. Double check the prefabs and remove the PoolID attached to them.
+It is suppose to be scrapped off when the application quits, but sometimes it is missed.
+
+You can contact me at demonkingj@hotmail.com  (funny email, but it is not my personal to avoid possible spam).
+
+Enjoy!
