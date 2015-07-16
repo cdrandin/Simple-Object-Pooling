@@ -26,15 +26,15 @@ to the object, thus not being able to return it back to the pool.
 
 There is only a single instance of the object which can be called 
 with the following:
-	PoolingSystem.instance
+	`PoolingSystem.instance`
 	
 Create your objects the same way you would with Unity's Instantiate method;
 Call:
-	PoolingSystem.instance.PS_Instantiate([GameObject]);
+	`PoolingSystem.instance.PS_Instantiate([GameObject]);`
 	
 Destroy your objects the same way you would with Unity's Destroy method;
 Call:
-	PoolingSystem.instance.PS_Destroy([GameObject]);
+	`PoolingSystem.instance.PS_Destroy([GameObject]);`
 	
 	
 Any feedback would be awesome or any concerns about the software just let me know for anyway I can improve it.
