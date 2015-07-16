@@ -211,7 +211,7 @@ public class PoolingSystem : MonoBehaviour
 	public GameObject PS_Instantiate(GameObject obj)
 	{
 		GameObject o = null;
-		PoolID   obj_pid = obj.GetComponent<PoolID>();
+		PoolID obj_pid = obj.GetComponent<PoolID>();
 		
 		if(obj_pid != null && _objects.Count == 0)
 		{

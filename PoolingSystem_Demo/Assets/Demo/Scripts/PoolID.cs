@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PoolID : MonoBehaviour {
-	[SerializeField]private int _id;
+public class PoolID : MonoBehaviour 
+{
+	[SerializeField]
+	private int _id;
 	private bool _init;
 
 	public int id
