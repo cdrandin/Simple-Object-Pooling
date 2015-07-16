@@ -26,6 +26,7 @@ to the object, thus not being able to return it back to the pool.
 
 There is only a single instance of the object which can be called 
 with the following:
+
 	`PoolingSystem.instance`
 	
 Create your objects the same way you would with Unity's Instantiate method;
