@@ -48,25 +48,6 @@ public class PoolingSystem : MonoBehaviour
 		{
 			GameObject obj = null; 
 			
-			/*
-			// Go through our list of pooled objects
-			for(int i=0;i<_pool.Count;++i)
-			{
-				// Current object is not being used
-				if(!_pool[i].activeInHierarchy)
-				{
-					obj = _pool[i]; 
-					// stop for loop. Way to prevent branch with break or return
-					i   = _pool.Count; 
-					obj.SetActive(true);
-					if(PoolingSystem.instance.object_hierarchy)
-					{
-						obj.transform.parent = _pool_root.transform;
-					}
-				}
-			}
-			*/
-			
 			// First node has an available object, this is how the list is organized
 			LinkedListNode<GameObject> first = _pool.First;
 			if(first != null)
@@ -79,13 +60,6 @@ public class PoolingSystem : MonoBehaviour
 					// Move to end
 					_pool.Remove(obj);
 					_pool.AddLast(obj);
-					
-					/*
-					if(PoolingSystem.instance.object_hierarchy)
-					{
-						obj.transform.parent = _pool_root.transform;
-					}
-					*/
 				}
 			}
 			
@@ -99,8 +73,6 @@ public class PoolingSystem : MonoBehaviour
 				{
 					obj.transform.parent = _pool_root.transform;
 				}
-				
-				//_pool.Add (obj);
 				
 				// Move to end
 				_pool.AddLast(obj);
@@ -117,25 +89,7 @@ public class PoolingSystem : MonoBehaviour
 		public bool ReturnObject(GameObject obj)
 		{
 			bool recieved = false;
-			
-			/*
-			if(obj.tag == this._main.tag)
-			{
-				for(int i=0;i<_pool.Count;++i)
-				{
-					if(_pool[i] == obj)
-					{
-						//_pool[i]   = obj; 
-						// stop for loop. Way to prevent branch with break or return
-						recieved   = true;
-						_pool[i].SetActive(false);
-						obj        = null;
-						i          = _pool.Count;
-					}
-				}
-			}
-			*/
-			
+		
 			// Validation
 			if(_main.GetComponent<PoolID>().id == obj.GetComponent<PoolID>().id)
 			{
