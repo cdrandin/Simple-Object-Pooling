@@ -20,7 +20,7 @@ public class RunPoolingSystem : MonoBehaviour
 	{
 		if(Input.GetKeyDown(KeyCode.Space))
 		{
-			GameObject obj = PoolingSystem.instance.PS_Instantiate(objects_to_pool[Random.Range(0, objects_to_pool.Count)], 
+			GameObject obj = PoolingSystem.instance.Instantiate(objects_to_pool[Random.Range(0, objects_to_pool.Count)], 
 				                                                 new Vector3(Random.Range(-5.0f, 5.0f), 3.0f, Random.Range(-5.0f, 5.0f)),
 				                                                 Quaternion.identity);
 
@@ -35,7 +35,7 @@ public class RunPoolingSystem : MonoBehaviour
 			{
 				int i = Random.Range(0, objects_in_the_pool.Count);
 
-				PoolingSystem.instance.PS_Destroy(objects_in_the_pool[i]);
+				PoolingSystem.instance.Destroy(objects_in_the_pool[i]);
 
 				objects_in_the_pool.RemoveAt(i);
 			}

@@ -1,8 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="..\Bubbler\Assets\Game\Scripts\Utility\GUIAspectRatioScale.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Demo/Scripts/PoolID.cs">
     <Files>
-      <File FileName="..\Bubbler\Assets\Game\Scripts\Utility\GUIAspectRatioScale.cs" Line="46" Column="2" />
+      <File FileName="Assets/Demo/Scripts/PoolID.cs" Line="24" Column="16" />
+      <File FileName="Assets/Demo/Scripts/PoolingSystem.cs" Line="297" Column="62" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -13,7 +13,7 @@ public class PoolingSystem : MonoBehaviour
 	public bool object_hierarchy;
 	
 	#region Pooled Object class
-	private class Pooled_Object
+	private class PooledObject
 	{
 		// Main object to copy and pool
 		private GameObject _main;
@@ -24,7 +24,7 @@ public class PoolingSystem : MonoBehaviour
 		// Root for the pooled objects for the specified object
 		private GameObject _pool_root;
 		
-		public Pooled_Object(GameObject obj)
+		public PooledObject(GameObject obj)
 		{
 			_main      = obj;
 			_pool     = new LinkedList<GameObject>();
@@ -92,7 +92,7 @@ public class PoolingSystem : MonoBehaviour
 			// Allow to expand pool, if no more in pool
 			if(obj == null)
 			{
-				obj = Instantiate(_main, Vector3.zero, Quaternion.identity) as GameObject;
+				obj = GameObject.Instantiate(_main, Vector3.zero, Quaternion.identity) as GameObject;
 				obj.SetActive(true);
 				
 				if(PoolingSystem.instance.object_hierarchy)
@@ -208,7 +208,7 @@ public class PoolingSystem : MonoBehaviour
 	/// in the pool, expanded the pool to add more.
 	/// </summary>
 	/// <param name="obj">Object.</param>
-	public GameObject PS_Instantiate(GameObject obj)
+	public GameObject Instantiate(GameObject obj)
 	{
 		GameObject o = null;
 		PoolID obj_pid = obj.GetComponent<PoolID>();
@@ -222,7 +222,7 @@ public class PoolingSystem : MonoBehaviour
 		// Cahced already, search for the correct pool
 		if(obj_pid != null)
 		{
-			Pooled_Object po = (Pooled_Object)_objects[obj_pid.id];
+			PooledObject po = (PooledObject)_objects[obj_pid.id];
 			if(po.main_obj.GetComponent<PoolID>().id == obj_pid.id)
 			{
 				o  = po.GetObject();
@@ -232,7 +232,7 @@ public class PoolingSystem : MonoBehaviour
 		else
 		{
 			// Create new object and have it generate a pool id
-			Pooled_Object po = new Pooled_Object(obj);
+			PooledObject po = new PooledObject(obj);
 			
 			// Get pool id for this object now
 			obj_pid = obj.GetComponent<PoolID>();
@@ -260,9 +260,9 @@ public class PoolingSystem : MonoBehaviour
 	/// in the pool, expanded the pool to add more.
 	/// </summary>
 	/// <param name="obj">Object.</param>
-	public GameObject PS_Instantiate(GameObject obj, Vector3 position, Quaternion rotation)
+	public GameObject Instantiate(GameObject obj, Vector3 position, Quaternion rotation)
 	{
-		GameObject o = PS_Instantiate(obj);
+		GameObject o = Instantiate(obj);
 		
 		o.transform.position = position;
 		o.transform.rotation = rotation;
@@ -274,14 +274,14 @@ public class PoolingSystem : MonoBehaviour
 	/// Destroy the specified object by removing the reference of the passed object, disabling the major component
 	/// </summary>
 	/// <param name="obj">Object.</param>
-	public void PS_Destroy(GameObject obj)
+	public void Destroy(GameObject obj)
 	{
 		PoolID obj_pid = obj.GetComponent<PoolID>();
 		
 		// Object is in our pool
 		if(obj_pid != null)
 		{
-			Pooled_Object po = (Pooled_Object)_objects[obj_pid.id];
+			PooledObject po = (PooledObject)_objects[obj_pid.id];
 			po.ReturnObject(obj);
 		}
 		else
@@ -293,7 +293,7 @@ public class PoolingSystem : MonoBehaviour
 	{
 		foreach (DictionaryEntry entry in _objects)
 		{
-			Pooled_Object po = (Pooled_Object)entry.Value;
+			PooledObject po = (PooledObject)entry.Value;
 			Component.DestroyImmediate(po.main_obj.GetComponent<PoolID>(), true);
 		}
 	}
